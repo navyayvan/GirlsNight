@@ -1,7 +1,15 @@
-<% artistEventData.forEach(function (event) { %>
+<% eventData.forEach(function (event) { %>
 		<ul>
-		<li> <a href=' '> <%= event.series.displayName%> </a> </li>
-		<li> <a href=' '> <%= event.location %> </a> </li>
+		<li> <a href=' '> <%= event.eventName %> </a> </li>
+		<li> <a href=' '> <%= event.eventLocation  %> </a> </li>
+		<li> <a href=' '> <%= event.eventDate  %> </a> </li>
+		<li> <a href=' '> <%= event.eventTime %> </a> </li>
+		<li> <a href=' '> <%= event.eventId %> </a> </li>
+
 		</ul>
+
+		<form action='/profile/rsvp/<%=event.eventId%>' method='POST'>
+			<input type='submit' value='RSVP YES'>
+		</form>
 
 	<% }); %>

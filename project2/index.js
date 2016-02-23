@@ -3,22 +3,75 @@ var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:false}));
 var request = require('request');
-var session = require('express-session');
 var passport = require('passport');
 var db = require('./models');
-var flash = require('connect-flash');
-var strategies = require('./config/strategies');
+var session = require('express-session');
 var ejsLayouts = require("express-ejs-layouts");
+var flash = require('connect-flash');
 
 app.use(ejsLayouts);
 app.set('view engine', 'ejs');
+
+app.use(session({
+  secret: 'dsalkfjasdflkjgdfblknbadiadsnkl',
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(flash());
-app.use(passport.initialize());
-app.use(passport.session());
 
+app.use(function(req, res, next) {
+  if (req.session.userId) {
+    db.user.findById(req.session.userId).then(function(user) {
+      req.currentUser = user;
+      res.locals.currentUser = user;
+      next();
+    });
+  } else {
+    req.currentUser = false;
+    res.locals.currentUser = false;
+    next();
+  }
+});
 
-var loginCtrl = require("./controllers/login.js");
-app.use('/', loginCtrl);
+app.get('/', function(req, res) {
+  res.render('index', {alerts: req.flash()});
+});
+
+app.get('/profile', function(req,res) {
+  // db.user.findById(req.session.userId).then(function(user) {
+    // user.getEvents().then(function(events){
+      //user.getHobbies().then(function(hobbies){
+     //   res.render('profile', {events: events, user: user, hobbbies: hobbies})
+     // })
+      //
+   // })
+  //})
+})
+
+app.post('/profile/rsvp/:id', function(req,res) {
+    var id = req.params.id;
+    db.user.findById(req.session.userId).then(function(user) {
+      request(
+        'http://api.songkick.com/api/3.0/events/'+id+'.json?apikey=MOgnRVGp6ax4p3IT',
+        function(error, response, body) {
+          if (!error && response.statusCode == 200) {
+            body = JSON.parse(body);
+            var eventData = [];
+            if ()
+          }
+        }
+       )
+
+      //db.event.create({id:id,details.....}).then(funcion(event){
+      //   user.addEvent(event).then(function(){
+        //res.render/redirect/whatever
+      // })
+      // })
+    })
+})
+
+app.use('/auth', require('./controllers/auth'));
+
 
 var searchCtrl = require("./controllers/search.js");
 app.use("/", searchCtrl);
@@ -29,74 +82,3 @@ app.use('/result', resultCtrl);
 
 
 app.listen(3000);
-////////////////////////////////////////////////////////
-
-// passport.serializeUser(strategies.serializeUser);
-// passport.deserializeUser(strategies.deserializeUser);
-
-
-//password stuff
-
-// app.use(session({
-//   secret: 'asdhk4t5i9238jsndlsti33tk',
-//   resave: false,
-//   saveUninitialized: true
-// }));
-
-// bcrypt.hash("myPassword", 10, function(err, hash) {
-//   //hash = encrypted password (using salt)
-// });
-
-// req.session.lastPage = '/myPage'
-
-
-// app.use(function (req, res, next) {
-//   req.getParamNames = function(){
-//     return Object.keys(req.params);
-//   }
-//   next();
-// });
-
-// app.get('/sum/:x/:y',function(req,res){
-//   res.send(req.getParamNames());
-// });
-// //outputs: ['x','y']
-
-// app.post('/', function(req, res) {
-//   db.user.findOrCreate({
-//     where: {
-//       email: req.body.email
-//     },
-//     defaults: {
-//       name: req.body.name,
-//       password: req.body.password
-//     }
-//   }).spread(function(user, created) {
-//     res.redirect('/')
-//   }).catch(function(err) {
-//     res.send(err);
-//   })
-// });
-
-// app.use(function(req, res, next) {
-//   if (req.session.userId) {
-//     db.user.findById(req.session.userId).then(function(user) {
-//       req.currentUser = user;
-//       res.locals.currentUser = user;
-//       next();
-//     });
-//   } else {
-//     req.currentUser = false;
-//     res.locals.currentUser = false;
-//     next();
-//   }
-// });
-
-// app.get('/secret', function(req, res) {
-//   if (req.currentUser) {
-//     res.render('secret');
-//   } else {
-//     req.flash('danger', 'You must be logged in to view this page');
-//     res.redirect('/');
-//   }
-// });

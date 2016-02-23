@@ -1,49 +1,48 @@
+'use strict';
+
 var bcrypt = require('bcryptjs');
 
-'use strict';
 module.exports = function(sequelize, DataTypes) {
   var user = sequelize.define('user', {
-    name: DataTypes.STRING,
     email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    photo: DataTypes.STRING,
-    hobby: DataTypes.STRING,
-    artist: DataTypes.STRING
+    name: DataTypes.STRING,
+    password: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [8, 99],
+          msg: 'Your password should between 8 and 99 characters'
+        }
+      }
+    }
   }, {
     classMethods: {
       associate: function(models) {
-        models.user.hasMany(models.event),
-        models.user.hasMany(models.hobby)
+        models.user.belongsToMany(models.hobby, {through: 'usersHobbys'}),
+        models.user.belongsToMany(models.event, {through: 'usersEvents'})
       },
       authenticate: function(email, password, callback) {
         this.find({
           where: {email: email}
         }).then(function(user) {
           if (!user) callback(null, false);
-          bcrypt.compare(password, user.password, function(err,result) {
+          bcrypt.compare(password, user.password, function(err, result) {
             if (err) return callback(err);
-            callback(null, result ? user: false);
-          })
+            callback(null, result ? user : false);
+          });
         }).catch(callback);
       }
     },
-      instanceMethods: {
-        checkPassword: function(password, callback) {
-          if (password && this.password) {
-            bcrypt.compare(password, this.password, callback);
-          } else {
-            callback(null, false);
-          }
-        }
-      },
     hooks: {
-      beforeCreate: function (user, options, callback) {
+      beforeCreate: function(user, options, callback) {
         if (user.password) {
-          bcrypt.hash(user.password, 10, function (err, hash) {
+          bcrypt.hash(user.password, 10, function(err, hash) {
             if (err) return callback(err);
             user.password = hash;
             callback(null, user);
           });
+        } else {
+          callback(null, user);
         }
       }
     }

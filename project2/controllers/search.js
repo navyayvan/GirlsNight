@@ -14,9 +14,10 @@ router.post("/artist", function(req, res) {
 	request(
 		'http://api.songkick.com/api/3.0/search/artists.json?query=' + searchArtist + '&apikey=MOgnRVGp6ax4p3IT',
 		function(error, response, body) {
+			// console.log(response)
 			if (!error && response.statusCode == 200) {
 				console.log(body);
-				body = JSON.parse(body)
+				body = JSON.parse(body);
 				// res.json (body)
 				// var artistresult = body.resultsPage.results.artist.map(function(artist){
 				// 	return artist.displayName;
