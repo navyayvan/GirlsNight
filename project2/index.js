@@ -17,15 +17,22 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+var loginCtrl = require("./controllers/login.js");
+app.use('/', loginCtrl);
+
+var searchCtrl = require("./controllers/search.js");
+app.use("/", searchCtrl);
+
+var resultCtrl = require('./controllers/result.js');
+app.use('/result', resultCtrl);
+
+
+
+app.listen(3000);
 ////////////////////////////////////////////////////////
 
-passport.serializeUser(strategies.serializeUser);
-passport.deserializeUser(strategies.deserializeUser);
-
-app.get('/', function(req,res) {
-	res.render('login.ejs');
-})
-
+// passport.serializeUser(strategies.serializeUser);
+// passport.deserializeUser(strategies.deserializeUser);
 
 
 //password stuff
@@ -43,56 +50,53 @@ app.get('/', function(req,res) {
 // req.session.lastPage = '/myPage'
 
 
-app.use(function (req, res, next) {
-  req.getParamNames = function(){
-    return Object.keys(req.params);
-  }
-  next();
-});
+// app.use(function (req, res, next) {
+//   req.getParamNames = function(){
+//     return Object.keys(req.params);
+//   }
+//   next();
+// });
 
-app.get('/sum/:x/:y',function(req,res){
-  res.send(req.getParamNames());
-});
-//outputs: ['x','y']
+// app.get('/sum/:x/:y',function(req,res){
+//   res.send(req.getParamNames());
+// });
+// //outputs: ['x','y']
 
-app.post('/', function(req, res) {
-  db.user.findOrCreate({
-    where: {
-      email: req.body.email
-    },
-    defaults: {
-      name: req.body.name,
-      password: req.body.password
-    }
-  }).spread(function(user, created) {
-    res.redirect('/')
-  }).catch(function(err) {
-    res.send(err);
-  })
-});
+// app.post('/', function(req, res) {
+//   db.user.findOrCreate({
+//     where: {
+//       email: req.body.email
+//     },
+//     defaults: {
+//       name: req.body.name,
+//       password: req.body.password
+//     }
+//   }).spread(function(user, created) {
+//     res.redirect('/')
+//   }).catch(function(err) {
+//     res.send(err);
+//   })
+// });
 
-app.use(function(req, res, next) {
-  if (req.session.userId) {
-    db.user.findById(req.session.userId).then(function(user) {
-      req.currentUser = user;
-      res.locals.currentUser = user;
-      next();
-    });
-  } else {
-    req.currentUser = false;
-    res.locals.currentUser = false;
-    next();
-  }
-});
+// app.use(function(req, res, next) {
+//   if (req.session.userId) {
+//     db.user.findById(req.session.userId).then(function(user) {
+//       req.currentUser = user;
+//       res.locals.currentUser = user;
+//       next();
+//     });
+//   } else {
+//     req.currentUser = false;
+//     res.locals.currentUser = false;
+//     next();
+//   }
+// });
 
-app.get('/secret', function(req, res) {
-  if (req.currentUser) {
-    res.render('secret');
-  } else {
-    req.flash('danger', 'You must be logged in to view this page');
-    res.redirect('/');
-  }
-});
-
-
-app.listen(3000);
+// app.get('/secret', function(req, res) {
+//   if (req.currentUser) {
+//     res.render('secret');
+//   } else {
+//     req.flash('danger', 'You must be logged in to view this page');
+//     res.redirect('/');
+//   }
+// });
