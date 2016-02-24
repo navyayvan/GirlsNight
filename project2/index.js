@@ -41,11 +41,11 @@ app.get('/', function(req, res) {
 app.use('/auth', require('./controllers/auth'));
 
 
-var profileCtrl = require("./controllers/profile.js");
+var profileCtrl = require('./controllers/profile.js');
 app.use('/profile', profileCtrl)
 
-var searchCtrl = require("./controllers/search.js");
-app.use("/", searchCtrl);
+var searchCtrl = require('./controllers/search.js');
+app.use('/', searchCtrl);
 
 var resultCtrl = require('./controllers/result.js');
 app.use('/result', resultCtrl);

@@ -10,6 +10,7 @@ router.get('/artist/:id', function(req,res) {
 		'http://api.songkick.com/api/3.0/artists/'+ id +'/calendar.json?apikey=MOgnRVGp6ax4p3IT',
 		function(error, response, body) {
 			if (!error && response.statusCode == 200) {
+				//4328881
 				body = JSON.parse(body);
 				var artistEventData = [];
 				if (body.resultsPage.results.event) {
@@ -19,7 +20,8 @@ router.get('/artist/:id', function(req,res) {
 						eventDate: event.start.date, 
 						eventTime: event.start.time,
 						eventId: event.id,
-						eventVenue: event.venue.displayName
+						eventVenue: event.venue.displayName,
+						eventUrl: event.uri
 					}
 				})
 				} else {
@@ -29,6 +31,8 @@ router.get('/artist/:id', function(req,res) {
 			res.render('artistresult.ejs', { eventData: artistEventData })
 		});
 });
+
+
 
 // var artistEventData = body.resultsPage.results.event.map(function(artist) {
 					// return { eventName: artist.series.displayname, eventLocation: artist.location 

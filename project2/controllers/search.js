@@ -2,6 +2,7 @@ var express = require("express");
 var request = require('request');
 var router = express.Router();
 var bodyParser = require('body-parser');
+var db = require('../models');
 router.use(bodyParser.urlencoded({extended: false}));
 
 router.get('/search', function(req,res) {
@@ -45,6 +46,25 @@ router.post("/venue", function(req, res) {
 			}
 		}
 	)
+});
+
+router.post('/rsvp/:id', function(req,res) {
+    var id = req.params.id;
+    var date = req.body.date;
+    var venue = req.body.venue;
+    var location = req.body.location;
+    var name = req.body.name;
+    db.user.findById(req.session.userId).then(function(user) {
+      db.event.findOrCreate( 
+        { where: {name: name, date: date, venue: venue, location:location }})
+      .spread(function(event) {
+        db.usersEvents.create(
+          {userId: user.id, eventId: event.id}
+        ).then(function() {
+          res.redirect('/profile');
+        })
+      })
+    })
 });
 
 

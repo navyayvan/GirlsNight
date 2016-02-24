@@ -3,7 +3,8 @@ module.exports = function(sequelize, DataTypes) {
   var event = sequelize.define('event', {
     date: DataTypes.STRING,
     venue: DataTypes.STRING,
-    location: DataTypes.STRING
+    location: DataTypes.STRING,
+    name: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
