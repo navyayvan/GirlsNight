@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        models.user.belongsToMany(models.hobby, {through: 'usersHobbys'}),
+        models.user.belongsToMany(models.hobby, {through: 'usersHobbies'}),
         models.user.belongsToMany(models.event, {through: 'usersEvents'})
       },
       authenticate: function(email, password, callback) {

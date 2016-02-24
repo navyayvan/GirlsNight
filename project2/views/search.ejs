@@ -1,13 +1,17 @@
-<h1>Search Page </h1>
+<div style='margin-top:100px' class='container'>
+	
+	<form method="POST" action="/artist"  role="search">
+		<div class="form-group">
+		        <input class="form-control" placeholder="search by artist " type='text' name='searchartist'>
+				<input class="form-control btn btn-success" type="submit" value='find it!'>
+		</div>
+	</form>
 
-<form method='POST' action="/artist">
-			<input placeholder="search by artist " type='text' name='searchartist'>
-			
-			<input type="submit">
-</form>
+	<!-- <form method='POST' action="/venue">
+		<div class='form-group'>
+			<input class="form-control" placeholder="search by venue " type='text' name='searchvenue'>
+			<input class="form-control btn btn-success" type="submit" value='find it!'>
+		</div>
+	</form> -->
 
-
-<form method='POST' action="/venue">
-			<input placeholder="search by venue " type='text' name='searchvenue'>
-			<input type="submit">
-</form>
+</div>

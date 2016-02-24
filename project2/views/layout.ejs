@@ -5,11 +5,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script src="//code.jquery.com/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  <style>
-    body {
-      background-color: powderblue;
-    }
-  </style>
   </head>
   <body>
    <% if (typeof alerts !== 'undefined') { %>
@@ -25,6 +20,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
     <div class="container">
+    <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <a href='/' class='navbar-btn btn btn-success'> Home</a>
+<a href="/search" class="navbar-btn btn btn-success">Search for Shows!</a>
+<% if (currentUser) { %>
+  <a href='/profile' class='btn btn-success'>Profile</a>
+  <a href="/auth/logout" class="btn btn-primary">Logout</a>
+<% } else { %>
+  <a href="/auth/signup" class="navbar-btn btn btn-primary">Signup</a>
+  <a href="/auth/login" class="navbar-btn btn btn-primary">Login</a>
+<% } %>
+  </div><!-- /.container-fluid -->
+<img src='../../imgs/pinklogo.png'/>
+</nav>
       <%- body %>
     </div>
   </body>

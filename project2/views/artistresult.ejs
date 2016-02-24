@@ -1,15 +1,22 @@
 <% eventData.forEach(function (event) { %>
 		<ul>
-		<li> <a href=' '> <%= event.eventName %> </a> </li>
-		<li> <a href=' '> <%= event.eventLocation  %> </a> </li>
-		<li> <a href=' '> <%= event.eventDate  %> </a> </li>
-		<li> <a href=' '> <%= event.eventTime %> </a> </li>
-		<li> <a href=' '> <%= event.eventId %> </a> </li>
+		<li> <a href='<%=event.uri %>'> <%= event.eventName %> </a> </li>
+		<li> <%= event.eventLocation  %> </a> </li>
+		<li> <%= event.eventDate  %> </a> </li>
+		<li> <%= event.eventTime %> </a> </li>
+		<!-- <li> <%= event.eventId %> </a> </li> -->
+		<li> <%= event.eventVenue %> </a> </li>
 
 		</ul>
 
 		<form action='/profile/rsvp/<%=event.eventId%>' method='POST'>
-			<input type='submit' value='RSVP YES'>
+			<div class="form-group">
+				<input type="hidden" class="form-control" id="" name='date' value='<%= event.eventDate%>'>
+				<input type="hidden" class="form-control" id="" name='venue' value='<%= event.eventVenue %>'>
+				<input type='hidden' class='form-control' id='' name='location' value='<%= event.eventLocation %>'>
+			</div>
+			<input class='btn btn-success' type='submit' value='RSVP YES'>		
 		</form>
+
 
 	<% }); %>

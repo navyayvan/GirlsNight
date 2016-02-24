@@ -18,7 +18,8 @@ router.get('/artist/:id', function(req,res) {
 						eventLocation: event.location.city,
 						eventDate: event.start.date, 
 						eventTime: event.start.time,
-						eventId: event.id
+						eventId: event.id,
+						eventVenue: event.venue.displayName
 					}
 				})
 				} else {
