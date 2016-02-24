@@ -16,6 +16,23 @@ router.get('/', function(req,res) {
     })
 });
 
+router.post('/hobby', function(req,res) {
+    var hobby = req.body.hobby;
+    db.user.findById(req.session.userId).then(function(user) {
+      db.hobby.findOrCreate( 
+        { where: {hobby: hobby}})
+      .spread(function(hobby) {
+        // console.log(user);
+        // console.log('separation');
+        // console.log(hobby);
+        db.usersHobbies.create(  
+            {userId: user.id, hobbyId: hobby.id}
+        ).then(function() { 
+          res.redirect('/profile');
+        })
+      })
+    });
+})
 
 // app.post('rsvp/:id', function(req,res) {
     // var id = req.params.id;
