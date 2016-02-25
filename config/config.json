@@ -10,9 +10,6 @@
     "dialect": "postgres"
   },
   "production": {
-    "database": "girlsnight",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
-
+    "use_env_variable": "girlsnight"
   }
 }
