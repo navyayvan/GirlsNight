@@ -30,7 +30,7 @@ router.post("/artist", function(req, res) {
 				var artistData = body.resultsPage.results.artist.map(function(artist){
 					return {name: artist.displayName, id:artist.id }
 				})
-			res.render('result.ejs', {artistData: artistData});
+			res.render('result.ejs', {artistData: artistData, searchArtist: searchArtist});
 			}else{
 				//error handling here
 				// res.send(response)

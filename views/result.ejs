@@ -1,5 +1,10 @@
-<% artistData.forEach(function (artist) { %>
-	<ul>
-	<li> <a href='/result/artist/<%=artist.id %>'> <%= artist.name%> </a> </li>
-	</ul>
-<% }); %>
+<div class='container center-align'>
+	<h4> Search Results for '<%=searchArtist %>': </h4>
+	<% artistData.forEach(function (artist) { %>
+		<div class='section center-align'>
+			<ul>
+			<li> <a href='/result/artist/<%=artist.id %>'> <%= artist.name%> </a> </li>
+			</ul>
+		</div>
+	<% }); %>
+</div>
