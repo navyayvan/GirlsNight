@@ -1,0 +1,19 @@
+	<h1>Event Information </h1>
+	<ul>
+		<li> <%= event.name %> </li>
+		<li> <%= event.date %></li>
+		<li> <%= event.location %> </li>
+	</ul>
+
+	<h2>Frands </h2>
+	<% user.forEach(function(user) { %>
+		<ul>
+		<%= user.name %>
+		<%= user.email %>
+			<ul>
+				<% user.hobbies.forEach(function(hobby) { %>
+					<li><%= hobby.hobby %> </li>
+				<%	}) %>
+			</ul>
+		</ul>	
+	<%	}) %>

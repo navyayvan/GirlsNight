@@ -17,6 +17,7 @@ router.get('/', function(req,res) {
     })
 });
 
+
 router.post('/hobby', function(req,res) {
     var hobby = req.body.hobby;
     db.user.findById(req.session.userId).then(function(user) {
@@ -32,20 +33,6 @@ router.post('/hobby', function(req,res) {
     });
 });
 
-router.post('rsvp/:id', function(req,res) {
-    var id = req.params.id;
-    db.user.findById(req.session.userId).then(function(user) {
-      db.event.findOrCreate( 
-        { where: {date: date, venue: venue, location:location }})
-      .spread(function(event) {
-        db.usersEvents.create(
-          {userId: user.id, eventId: event.id}
-        ).then(function() {
-          res.redirect('/profile');
-        })
-      })
-    })
-});
     
 
 module.exports = router;

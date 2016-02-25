@@ -36,17 +36,17 @@ router.post("/artist", function(req, res) {
 
 });
 
-router.post("/venue", function(req, res) {
-	var searchVenue = req.body.searchvenue;
-	request(
-		'http://api.songkick.com/api/3.0/search/venues.json?query=' + searchVenue + '&apikey=MOgnRVGp6ax4p3IT',
-		function(error, response, body) {
-			if (!error && response.statusCode == 200) {
-				res.send(body);
-			}
-		}
-	)
-});
+// router.post("/venue", function(req, res) {
+// 	var searchVenue = req.body.searchvenue;
+// 	request(
+// 		'http://api.songkick.com/api/3.0/search/venues.json?query=' + searchVenue + '&apikey=MOgnRVGp6ax4p3IT',
+// 		function(error, response, body) {
+// 			if (!error && response.statusCode == 200) {
+// 				res.send(body);
+// 			}
+// 		}
+// 	)
+// });
 
 router.post('/rsvp/:id', function(req,res) {
     var id = req.params.id;
@@ -54,9 +54,10 @@ router.post('/rsvp/:id', function(req,res) {
     var venue = req.body.venue;
     var location = req.body.location;
     var name = req.body.name;
+    var api_id = req.body.api_id;
     db.user.findById(req.session.userId).then(function(user) {
       db.event.findOrCreate( 
-        { where: {name: name, date: date, venue: venue, location:location }})
+        { where: {name: name, date: date, venue: venue, location:location, api_id: api_id }})
       .spread(function(event) {
         db.usersEvents.create(
           {userId: user.id, eventId: event.id}

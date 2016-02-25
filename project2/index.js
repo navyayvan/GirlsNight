@@ -50,5 +50,8 @@ app.use('/', searchCtrl);
 var resultCtrl = require('./controllers/result.js');
 app.use('/result', resultCtrl);
 
+var eventCtrl = require('./controllers/event.js');
+app.use('/event', eventCtrl);
+
 
 app.listen(3000);
