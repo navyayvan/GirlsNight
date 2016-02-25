@@ -13,7 +13,7 @@ router.post("/artist", function(req, res) {
 	var searchArtist = req.body.searchartist;
 	console.log(searchArtist);
 	request(
-		'http://api.songkick.com/api/3.0/search/artists.json?query=' + searchArtist + '&apikey='+process.env.API_KEY,
+		'http://api.songkick.com/api/3.0/search/artists.json?query='+ searchArtist +'&apikey=' + process.env.API_KEY,
 		function(error, response, body) {
 			// console.log(response)
 			if (!error && response.statusCode == 200) {
@@ -30,9 +30,12 @@ router.post("/artist", function(req, res) {
 				var artistData = body.resultsPage.results.artist.map(function(artist){
 					return {name: artist.displayName, id:artist.id }
 				})
+			res.render('result.ejs', {artistData: artistData});
+			}else{
+				//error handling here
+				// res.send(response)
 			}
-			res.render('result.ejs', { artistData: artistData});
-		})
+		});
 
 });
 

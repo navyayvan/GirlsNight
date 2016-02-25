@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <!-- Latest compiled and minified CSS & JS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-</head>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
 <body>
-    <div class="navbar navbar-default">
-    <nav>
+<div class="navbar navbar-default">
+  <nav>
     <ul class="nav nav-tabs nav-justified">
-    <li><a href='/' class='navbar-btn btn btn-success'> Home</a></li>
-    <li> <a href="/search" class="navbar-btn btn btn-success">Search for Shows!</a></li>
-    <% if (currentUser) { %>
-    <li> <a href='/profile' class='btn btn-success'>Profile</a></li>
-    <li> <a href="/auth/logout" class="btn btn-primary">Logout</a><li>
-    <% } else { %>
-   <li> <a href="/auth/signup" class="navbar-btn btn btn-primary">Signup</a></li>
-     <li> <a href="/auth/login" class="navbar-btn btn btn-primary">Login</a></li>
-    <% } %>
-  </ul>
-</nav>
+      <li><a href='/' class='navbar-btn btn btn-success'> Home</a></li>
+      <li> <a href="/search" class="navbar-btn btn btn-success">Search for Shows!</a></li>
+      <% if (currentUser) { %>
+      <li> <a href='/profile' class='btn btn-success'>Profile</a></li>
+      <li> <a href="/auth/logout" class="btn btn-primary">Logout</a><li>
+      <% } else { %>
+      <li> <a href="/auth/signup" class="navbar-btn btn btn-primary">Signup</a></li>
+      <li> <a href="/auth/login" class="navbar-btn btn btn-primary">Login</a></li>
+      <% } %>
+    </ul>
+  </nav>
 </div>
 
 <% if (typeof alerts !== 'undefined') { %>
@@ -29,9 +31,11 @@
       <% } %>
     <% } %>
    
-   <%- body %>
+  <%- body %>
 
-     <script src="//code.jquery.com/jquery.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+
   </body>
 </html>
