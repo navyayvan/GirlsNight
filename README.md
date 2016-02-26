@@ -18,7 +18,9 @@
 
 <h3>Instructions </h3>
   <ol>
-    <li> </li>
-    <li> </li>
+    <li>Create an account - sign up with email you check often. </li>
+    <li>Use search function to find shows, and click 'Got plans!' to any events you'd like to add to your profile.</li>
+    <li>Navigate to profile page to view your upcoming events, and list your professional/personal interests.</li>
+    <li> Click on upcoming events on your own profile page to connect with other attendees. </li>
   </ol>
 
