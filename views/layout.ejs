@@ -8,14 +8,16 @@
       }
     </style>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Overlock' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
   </head>
 
 <body>
   <nav>
     <div class="nav-wrapper #b2dfdb teal lighten-4">
+      <a style='font-family: Overlock' class="brand-logo">GirlsNight</a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href='/'><i class="material-icons">home</i></a></li>
@@ -52,16 +54,21 @@
 
   <%- body %>
 
-  <script src="//code.jquery.com/jquery.js"></script>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  
+  <script src="https://code.jquery.com/jquery.js"></script>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+
   <script>
     $(document).ready(function() {
        $(".button-collapse").sideNav();
-    })
+    });
+
     $(document).ready(function(){
       $('.parallax').parallax();
     });
   </script>
+
+  <script type="text/javascript" src='js/main.js'></script>
   </body>
 </html>

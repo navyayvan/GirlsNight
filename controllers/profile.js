@@ -33,6 +33,27 @@ router.post('/hobby', function(req,res) {
     });
 });
 
-    
+
+router.delete('/hobby/:id', function(req,res) {
+  var id = req.params.id;
+    console.log('im deleting!');
+  db.usersHobbies.destroy({
+    where: {
+      userId: req.session.userId,
+      hobbyId: id
+    }
+  }).then(function(user) {
+    res.redirect('/profile.ejs');
+  // db.userHobbies.find( {
+    //   where: {
+    //     hobbyId: req.params.id
+    //   }
+    // // }).then(function(hobby){
+    //   res.send(hobby);
+    //   res.redirect('/profile');
+    // })
+  })
+});
+
 
 module.exports = router;

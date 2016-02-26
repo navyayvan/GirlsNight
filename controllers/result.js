@@ -25,7 +25,7 @@ router.get('/artist/:id', function(req,res) {
 					}
 				})
 				} else {
-					res.send('This artist is not on tour!');
+					res.render('../views/notontour.ejs');
 				}
 			};
 			res.render('artistresult.ejs', { eventData: artistEventData })

@@ -1,31 +1,44 @@
-<div class='row #e0f7fa cyan lighten-5 flow-text'>
-	<div class='col s12 m4 l2'>
-		<h3><%= user.name %> </h3>
-		<p> <%= user.email %> <p>
-	</div>
+<div class='container'>
 
-	<div class='col s12 m4 l8 flow-text'>
-		<h4>Upcoming Events </h4>
-		<% events.forEach(function(event){ %>
-		<li><a href='/event/<%= event.api_id %>'> <%= event.name %> </a> </li>
-		<li> <%= event.venue%> </li>
-		<li> <%= event.location %> </li>
-		<li> <%= event.date %> </li>
-		<% }) %>
-	</div>
+<div class='row'>
 
-	<div class='col s12 m4 l2 flow-text'>
-		<h4> Hobbies </h4>
-			<% hobbies.forEach(function(hobby){ %>
-			<ul>
-			<div class='chip'><li><%= hobby.hobby %></li></div>
-			<%	}) %>
-			</ul>
-			<form action='/profile/hobby' method='POST'>
-				<input type='text' placeholder='write hobby here' name='hobby'/>
-				<input type='submit' value='submit hobby'>
-			</form>
-	</div>
+		<div class='col m4'>
+			<h3><%= user.name %> </h3>
+			<p> <%= user.email %> </p>
+		</div>
 
-</div>
+		<div class='col m4 right-align'>
+			<h4 class='center-align'>I will be attending: </h4>
+			<% events.forEach(function(event){ %>
+				<div class='card'>
+					<ul class='flow-text center-align'>
+						<div class='card-title'> <li><a href='/event/<%= event.api_id %>'> <%= event.name %> </a> </li> </div>
+						<li> <%= event.venue%> </li>
+						<li> <%= event.location %> </li>
+						<li> <%= event.date %> </li>
+					</ul>
+				</div>
+			<% }) %>
+		</div>
+
+		<div class='col m4 center-align'>
+			<h4> Interests </h4>
+			<p>submit interests so others can see what you're all about!</p>
+				<% hobbies.forEach(function(hobby){ %>
+				<ul>
+					<div class='chip'>
+						<li>
+							<a class='hobby' href='/profile/hobby/<%=hobby.id%>'> <%= hobby.hobby %> </a>
+						</li>
+					</div>
+				</ul>
+				<%	}) %>
+				
+				<form action='/profile/hobby' method='POST'>
+					<input type='text' placeholder='write hobby here' name='hobby'/>
+					<input type='submit' value='submit hobby'>
+				</form>
+		</div>
+
+	</div>
 

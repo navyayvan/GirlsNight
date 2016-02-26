@@ -11,7 +11,7 @@ var flash = require('connect-flash');
 
 app.use(ejsLayouts);
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/static'));
 
 app.use(session({
   secret: 'dsalkfjasdflkjgdfblknbadiadsnkl',
