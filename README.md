@@ -2,7 +2,7 @@
 
 <h2>User Stories </h2> 
 <ul>
-  <li> The app is a network for creative women, with a strong interest/career in music, looking to connect with likeminded women.
+  <li> The app is a network for creative women, with a strong interest and/or career in music, looking to connect with likeminded women.
   <li>A user should be able to RSVP to events, and connect with other users attending the same event. </li>
 </ul>
 
