@@ -13,6 +13,10 @@
   <li>Materialize CSS</li>
   <li>Postgres</li>
   <li>Node.js</li>
+  <li>HTML5, CSS, JS </li>
+  <li>Express.js </li>
+  <li>Bcryptjs</li>
+
 </ul>
 
 
